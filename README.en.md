@@ -147,5 +147,5 @@ Promise.resolve(echartsThenable).then(echarts => {
 
 ## Resources
 
-- Based on [vite-plugin-cdn-import](https://github.com/MMF-FE/vite-plugin-cdn-import).
-- Uses [rollup-plugin-external-globals](https://github.com/eight04/rollup-plugin-external-globals).
+- [vite-plugin-cdn-import](https://github.com/MMF-FE/vite-plugin-cdn-import).
+- [rollup-plugin-external-globals](https://github.com/eight04/rollup-plugin-external-globals).

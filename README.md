@@ -148,5 +148,5 @@ Promise.resolve(echartsThenable).then(echarts => {
 
 ## 资源
 
-- [vite-plugin-cdn-import](https://github.com/MMF-FE/vite-plugin-cdn-import)来实现
+- [vite-plugin-cdn-import](https://github.com/MMF-FE/vite-plugin-cdn-import)
 - [rollup-plugin-external-globals](https://github.com/eight04/rollup-plugin-external-globals)
