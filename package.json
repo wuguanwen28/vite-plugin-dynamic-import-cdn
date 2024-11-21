@@ -1,18 +1,32 @@
 {
   "name": "vite-plugin-dynamic-import-cdn",
   "version": "0.2.0",
-  "description": "",
+  "description": "在生产环境中使用 CDN 引入依赖，同时支持动态引入",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "dev": "rollup -c rollup.config.ts --configPlugin typescript --watch",
     "build": "rollup -c rollup.config.ts --configPlugin typescript",
-    "publish": "npm publish --registry https://registry.npmjs.org/"
+    "publish": "npm run build && npm publish --registry https://registry.npmjs.org/"
   },
-  "keywords": [],
-  "author": "wuguanwen",
-  "license": "ISC",
+  "keywords": [
+    "vite cdn plugin",
+    "dynamic import cdn"
+  ],
+  "files": [
+    "dist"
+  ],
+  "author": "wuguanwen<513951279@qq.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wuguanwen28/vite-plugin-dynamic-import-cdn.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wuguanwen28/vite-plugin-dynamic-import-cdn/issues"
+  },
+  "homepage": "https://github.com/wuguanwen28/vite-plugin-dynamic-import-cdn#readme",
   "dependencies": {
     "rollup-plugin-external-globals": "^0.12.0"
   },
