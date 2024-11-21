@@ -128,14 +128,41 @@ function getModuleVersion(item: Module, jsPath: string): string | undefined {
  * @param path
  * @returns
  */
-function isFullPath(path: string) {
+export function isFullPath(path: string, isCdnUrl = false) {
   if (!path) return false
-  return path.startsWith('{baseUrl}') ||
+  return (!isCdnUrl && path.startsWith('{baseUrl}')) ||
     path.startsWith('http:') ||
     path.startsWith('https:') ||
     path.startsWith('//')
     ? true
     : false
+}
+
+const defaultUrl: { [key in CdnKeys]: string } = {
+  unpkg: 'https://unpkg.com/{name}@{version}/{path}',
+  jsdelivr: 'https://cdn.jsdelivr.net/npm/{name}@{version}/{path}',
+  cdnjs: 'https://cdnjs.cloudflare.com/ajax/libs/{name}/{version}/{path}'
+}
+
+export function getCdnUrl(cdnUrl: string) {
+  if (Object.keys(defaultUrl).includes(cdnUrl)) {
+    return defaultUrl[cdnUrl]
+  }
+
+  if (!isFullPath(cdnUrl, true)) {
+    throw new Error(
+      `${pluginName}cdnUrl must be a full path or one of the presets: unpkg, jsdelivr, cdnjs`
+    )
+  }
+
+  let placeholder = ['{name}', '{path}', '{version}']
+  placeholder.forEach((item) => {
+    if (!cdnUrl.includes(item)) {
+      throw new Error(`${pluginName}cdnUrl must include ${item} placeholder`)
+    }
+  })
+
+  return cdnUrl
 }
 
 type ReplaceUrlOptions = {

@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [
     vue(),
     dynamicImportCdn({
-      cdnUrlPreset: 'cdnjs',
+      cdnUrl: 'cdnjs',
       modules: ['vue@3', 'vue-router@4', 'dayjs', 'lodash', 'moment', 'axios']
     })
   ]

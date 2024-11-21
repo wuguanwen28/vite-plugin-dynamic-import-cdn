@@ -10,14 +10,14 @@ export default defineConfig({
     // @ts-ignore
     monacoEditorPlugin['default']({}),
     dynamicImportCdn({
-      cdnUrlPreset: 'unpkg',
+      cdnUrl: 'https://unpkg.com/{name}@{version}/{path}',
       modules: [
         'react',
         'react-dom',
         'dayjs',
         'moment',
         'antd@5',
-        // 只支持全是引入，按需引入的echarts不适用
+        // 只支持全量引入，按需引入的echarts不适用
         {
           dynamic: 'global',
           name: 'echarts',

@@ -1,7 +1,8 @@
 import type { HtmlTagDescriptor, Plugin } from 'vite'
-import { CdnKeys, PluginOptions } from './type'
+import { PluginOptions } from './type'
 import externalGlobals from 'rollup-plugin-external-globals'
 import {
+  getCdnUrl,
   getCustomDescriptor,
   getDynamicImportStr,
   getExternalMap,
@@ -9,24 +10,17 @@ import {
   getModuleInfo
 } from './utils'
 
-let defaultUrl: { [key in CdnKeys]: string } = {
-  unpkg: 'https://unpkg.com/{name}@{version}/{path}',
-  jsdelivr: 'https://cdn.jsdelivr.net/npm/{name}@{version}/{path}',
-  cdnjs: 'https://cdnjs.cloudflare.com/ajax/libs/{name}/{version}/{path}'
-}
-
 const dynamicImportCdn = (options: PluginOptions): Plugin => {
   let isBuild = false
 
   let {
-    cdnUrl,
-    cdnUrlPreset = 'unpkg',
+    cdnUrl = 'unpkg',
     modules,
     generateScriptTag,
     generateCssLinkTag
   } = options
 
-  if (!cdnUrl) cdnUrl = defaultUrl[cdnUrlPreset]
+  cdnUrl = getCdnUrl(cdnUrl)
 
   let data = modules.map((item) => getModuleInfo(cdnUrl, item))
 

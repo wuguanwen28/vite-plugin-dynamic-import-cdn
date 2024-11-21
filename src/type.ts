@@ -22,23 +22,6 @@ export type Module = {
    * @example "/dist/antd.min.css"
    */
   css?: string | string[]
-  /** 语言包 */
-  locales?: {
-    /**
-     * 引入语言包路径
-     * @example 'moment/dist/locale/zh-cn'
-     */
-    name: string
-    /**
-     * 语言包变量
-     */
-    var?: string
-    /**
-     * 语言包的cdn路径
-     * @example
-     */
-    path: string
-  }[]
   /**
    * 依赖别名
    * @example "react-dom"的别名: ["react-dom/client"]
@@ -70,15 +53,10 @@ export type Module = {
 
 export type PluginOptions = {
   /**
-   * CDN基本路径，优先级比 cdnUrlPreset 高
+   * CDN基本路径，预设'jsdelivr' | 'cdnjs' | 'unpkg'
    * @example 'https://unpkg.com/{name}@{version}/{path}'
    */
-  cdnUrl?: string
-  /**
-   * CDN基本路径预设
-   * @default 'unpkg'
-   */
-  cdnUrlPreset?: CdnKeys
+  cdnUrl?: CdnKeys | (string & {})
   /** 模块配置 */
   modules: (Module | PresetKeys)[]
   /** 自定义生成script标签的属性与位置 */
