@@ -79,6 +79,10 @@ export const presetConfig = {
        * fix: moment的语言包会以 '../moment' 引入moment，导致moment也会被打包进来
        */
       if (id === 'moment' || id === '../moment') return 'moment'
+      /**
+       * fix: 修复项目中引入commonjs的语言包：moment/locale/zh-cn 报错问题
+       */
+      if (/moment[\\\/]moment/.test(id)) return 'moment'
     },
     cdnjs: {
       path: '{baseUrl}/moment.js/{version}/moment.min.js'

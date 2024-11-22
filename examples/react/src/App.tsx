@@ -6,9 +6,10 @@ import { Editor } from './components/Editor'
 import zhCN from 'antd/es/locale/zh_CN'
 import 'dayjs/locale/zh-cn'
 
-import moment from 'moment'
+import moment from 'moment/moment'
 // @ts-ignore
-import 'moment/dist/locale/zh-cn'
+import 'moment/locale/zh-cn'
+// import 'moment/dist/locale/zh-cn'
 
 function App() {
   console.log('moment ==> ', moment().format('LLL'))
