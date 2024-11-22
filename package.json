@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-dynamic-import-cdn",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "在生产环境中使用 CDN 引入依赖，同时支持动态引入",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
