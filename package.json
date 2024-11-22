@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "rollup -c rollup.config.ts --configPlugin typescript --watch",
     "build": "rollup -c rollup.config.ts --configPlugin typescript",
-    "publish": "npm run build && npm publish --registry https://registry.npmjs.org/",
+    "publish": "npm publish --registry https://registry.npmjs.org/",
     "release": "standard-version"
   },
   "keywords": [

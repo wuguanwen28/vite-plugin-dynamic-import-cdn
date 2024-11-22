@@ -69,6 +69,11 @@ export type PluginOptions = {
     name: string,
     path: string
   ) => Omit<HtmlTagDescriptor, 'tag' | 'children'>
+  /** 
+   * 只使用externalGlobals插件
+   * 如果你需要使用rollup打包某些CDN包时也许有用
+   */
+  onlyExternalGlobals?: boolean
 }
 export type CdnKeys = 'jsdelivr' | 'cdnjs' | 'unpkg'
 

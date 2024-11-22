@@ -17,7 +17,8 @@ const dynamicImportCdn = (options: PluginOptions): Plugin => {
     cdnUrl = 'unpkg',
     modules,
     generateScriptTag,
-    generateCssLinkTag
+    generateCssLinkTag,
+    onlyExternalGlobals
   } = options
 
   cdnUrl = getCdnUrl(cdnUrl)
@@ -28,6 +29,15 @@ const dynamicImportCdn = (options: PluginOptions): Plugin => {
   let externalList = Object.keys(externalMap)
   let customExternalList = Object.keys(customExternalMap)
 
+  let externalPlugin = externalGlobals((id: string) => {
+    if (externalList.includes(id)) return externalMap[id]
+
+    let name = customExternalList.find((item) => id.includes(item))
+    if (name) return customExternalMap[name]?.(id)
+  })
+
+  if (onlyExternalGlobals) return externalPlugin
+
   return {
     name: 'vite-plugin-dynamic-import-cdn',
     enforce: 'pre',
@@ -37,15 +47,7 @@ const dynamicImportCdn = (options: PluginOptions): Plugin => {
       return {
         build: {
           rollupOptions: {
-            plugins: [
-              //@ts-ignore
-              externalGlobals((id: string) => {
-                if (externalList.includes(id)) return externalMap[id]
-
-                let name = customExternalList.find((item) => id.includes(item))
-                if (name) return customExternalMap[name]?.(id)
-              })
-            ]
+            plugins: [externalPlugin]
           }
         }
       }
